@@ -1,0 +1,8 @@
+Title: OpenGL & Computer Graphics
+Description: >
+    From triangles into pixels!
+Date: 2016-11-18
+Thumbnail: graphics/teapots_ico.png
+Files:
+    SlidesPDF: opengl.pdf
+    LaTeX: opengl.tex
