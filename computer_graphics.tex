@@ -1,6 +1,6 @@
 \documentclass{lug}
 
-\title{OpenGL \& Computer Graphics}
+\title{Computer Graphics \& OpenGL}
 \author{Sam Sartor}
 \institute{Mines Linux Users Group}
 
@@ -13,11 +13,13 @@
 \patchcmd{\beamer@sectionintoc}{\vskip1.5em}{\vskip0.5em}{}{}
 \makeatother
 
-\begin{document}
-
 \newcommand{\pmidg}[1]{\parbox{\widthof{#1}}{#1}}
 
-\begin{frame}{What is Computer Graphics?}
+\begin{document}
+
+\section{Introduction}
+
+\begin{frame}{Definition}
 \begin{center}
     \pmidg{\includegraphics[width=4cm]{graphics/teapot_mesh}} \scalebox{2}{$\rightarrow$} \pmidg{\includegraphics[width=4cm]{graphics/teapot_rt_pix}} \\
     
@@ -27,21 +29,21 @@
 \end{center}
 \end{frame}
 
-\begin{frame}{What is Computer Graphics?}
+\begin{frame}{Uses}
     \noindent
     \begin{minipage}{.65\textwidth}
-        Computer Graphics is everywhere!
+        Computer graphics is everywhere!
         \begin{itemize}
             \item Your terminal \\
             \item Web browsers \\
             \item Video games \\
             \item CAD software \\
             \item Movies, TV Shows \\
-            \item The Ikea Catalog \\
+            \item Virtual reality \\
             \item Your bootloader \\
             \item QT, GTK+, wxWidgets \\
             \item Vim, Emacs, Notepad \\
-            \item Embedded devices \\
+            \item Embedded devices
         \end{itemize}
     \end{minipage}% This must go next to `\end{minipage}`
     \begin{minipage}{.35\textwidth}
@@ -49,7 +51,7 @@
     \end{minipage}
 \end{frame}
 
-\begin{frame}{Offline vs Online}
+\begin{frame}{Online and Offline}
 \end{frame}
 
 \begin{frame}{History}
