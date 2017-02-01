@@ -10,13 +10,9 @@
 \RequirePackage{ifxetex}
 \ifxetex\RequirePackage{fontspec}\fi
 
-\RequirePackage{minted}
-\RequirePackage{xcolor}
 \RequirePackage{hyperref}
 
 \renewcommand*\footnoterule{}
-\setminted{autogobble,python3,mathescape}
-%\usemintedstyle{emacs}
 
 \beamertemplatenavigationsymbolsempty%
 \def\logoimage{graphics/lug}

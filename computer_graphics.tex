@@ -19,16 +19,6 @@
 
 \section{Introduction}
 
-\begin{frame}{Definition}
-\begin{center}
-    \pmidg{\includegraphics[width=4cm]{graphics/teapot_mesh}} \scalebox{2}{$\rightarrow$} \pmidg{\includegraphics[width=4cm]{graphics/teapot_rt_pix}} \\
-    
-    \bigskip
-
-    Computer graphics is the science of turning \textit{shapes} into \textit{pixels}.
-\end{center}
-\end{frame}
-
 \begin{frame}{Uses}
     \noindent
     \begin{minipage}{.65\textwidth}
@@ -51,7 +41,14 @@
     \end{minipage}
 \end{frame}
 
-\begin{frame}{Online and Offline}
+\begin{frame}{Definition}
+\begin{center}
+    \pmidg{\includegraphics[width=4cm]{graphics/teapot_mesh}} \scalebox{2}{$\rightarrow$} \pmidg{\includegraphics[width=4cm]{graphics/teapot_rt_pix}} \\
+    
+    \bigskip
+
+    Computer graphics is the science of turning \textit{shapes} into \textit{pixels}. \footnote{Kindof, it can get more interesting than that}
+\end{center}
 \end{frame}
 
 \section{History}
@@ -138,42 +135,58 @@
 
 \section{Behind the Scenes}
 
-\section{OpenGL \& Direct3D}
+\begin{frame}{Realtime}
+    \noindent
+    \begin{minipage}{.7\textwidth - 1.5em}
+        \small
 
-\section{Text}
+        Realtime graphics use OpenGL or Direct3D to rasterize and shade
+        triangular geometry on a graphics card/chip. Performance is very
+        important due to the high framerate that is required for smooth
+        gameplay/interactivity/animation. Lighting and materials focus on
+        being "good enough" rather than on being truly accurate.
 
-\begin{frame}{Vector vs Raster}
-
+    \end{minipage}%
+    \hspace{1.5em}%
+    \begin{minipage}{.3\textwidth}
+        \includegraphics[width=\textwidth]{graphics/game_graphics}
+    \end{minipage}
 \end{frame}
 
-\begin{frame}{Crappy Text}
+\begin{frame}{UIs}
+    \noindent
+    \begin{minipage}{.7\textwidth - 1.5em}
+        \small
 
+        While they look different, UIs generally use OpenGL or Direct3D as
+        well. Everything is still made of textured \& shaded triangles. Anti-%
+        aliasing, text fidelity, etc. are all more important while lighting
+        effects are generally absent. Responsiveness is key, but the frame can
+        be updated as needed, not every 30th of a second.
+
+    \end{minipage}%
+    \hspace{1.5em}%
+    \begin{minipage}{.3\textwidth}
+        \includegraphics[width=\textwidth]{graphics/firefox_start}
+    \end{minipage}
 \end{frame}
 
-\begin{frame}{Subpixels \& Fancy Stuff}
+\begin{frame}{Offline}
+    \noindent
+    \begin{minipage}{.7\textwidth - 1.5em}
+        \small
 
+        Offline graphics are used when the medium is non-interactive (movies,
+        advertisements, etc). Because the available resources are limited only
+        by budget and patience, offline graphics have unmatched fidelity. CPUs
+        are often used instead of GPUs because this allows for more advanced
+        calculations. However, this comes at a cost. Individual frames may
+        take days to render.
+
+    \end{minipage}%
+    \hspace{1.5em}%
+    \begin{minipage}{.3\textwidth}
+        \includegraphics[width=\textwidth]{graphics/tarkin_combo} \\
+        \includegraphics[width=\textwidth]{graphics/green_mars}
+    \end{minipage}
 \end{frame}
-
-\begin{frame}{Atlases}
-
-\end{frame}
-
-\section{Offline Rendering}
-
-\begin{frame}{Physics}
-
-\end{frame}
-
-\begin{frame}{Local Illumination \& Rays}
-
-\end{frame}
-
-\begin{frame}{Monte-Carlo \& Pathtracing}
-
-\end{frame}
-
-\begin{frame}{Industry}
-
-\end{frame}
-
-\section{Cool Stuff}
