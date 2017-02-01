@@ -8,20 +8,31 @@
 \usepackage{array}
 \usepackage{amsmath}
 \usepackage{adjustbox}
+\usepackage{calc}
+\usepackage{lmodern}
 
 \makeatletter
 \patchcmd{\beamer@sectionintoc}{\vskip1.5em}{\vskip0.5em}{}{}
 \makeatother
 
 \newcommand{\pmidg}[1]{\parbox{\widthof{#1}}{#1}}
+\newcommand{\splitslide}[4]{
+    \noindent
+    \begin{minipage}{#1 \textwidth - #2 }
+        #3
+    \end{minipage}%
+    \hspace{ \dimexpr #2 * 2 \relax }%
+    \begin{minipage}{\textwidth - #1 \textwidth - #2 }
+        #4
+    \end{minipage}
+}
 
 \begin{document}
 
 \section{Introduction}
 
 \begin{frame}{Uses}
-    \noindent
-    \begin{minipage}{.65\textwidth}
+    \splitslide{0.65}{.7em}{
         Computer graphics is everywhere!
         \begin{itemize}
             \item Your terminal
@@ -35,10 +46,9 @@
             \item Vim, Emacs, Notepad
             \item Embedded devices
         \end{itemize}
-    \end{minipage}%
-    \begin{minipage}{.35\textwidth}
+    }{
         \pmidg{\includegraphics[width=\textwidth]{graphics/uses}}
-    \end{minipage}
+    }
 \end{frame}
 
 \begin{frame}{Definition}
@@ -54,8 +64,7 @@
 \section{Behind the Scenes}
 
 \begin{frame}{Realtime}
-    \noindent
-    \begin{minipage}{.7\textwidth - 1.5em}
+    \splitslide{0.7}{.7em}{
         \small
 
         Realtime graphics use OpenGL or Direct3D to rasterize and shade
@@ -64,16 +73,13 @@
         gameplay/interactivity/animation. Lighting and materials focus on
         being "good enough" rather than on being truly accurate.
 
-    \end{minipage}%
-    \hspace{1.5em}%
-    \begin{minipage}{.3\textwidth}
+    }{
         \includegraphics[width=\textwidth]{graphics/game_graphics}
-    \end{minipage}
+    }
 \end{frame}
 
 \begin{frame}{UIs}
-    \noindent
-    \begin{minipage}{.7\textwidth - 1.5em}
+   \splitslide{0.7}{.7em}{
         \small
 
         While they look different, UIs generally use OpenGL or Direct3D as
@@ -82,16 +88,13 @@
         effects are generally absent. Responsiveness is key, but the frame can
         be updated as needed, not every 30th of a second.
 
-    \end{minipage}%
-    \hspace{1.5em}%
-    \begin{minipage}{.3\textwidth}
+    }{
         \includegraphics[width=\textwidth]{graphics/firefox_start}
-    \end{minipage}
+    }
 \end{frame}
 
 \begin{frame}{Offline}
-    \noindent
-    \begin{minipage}{.7\textwidth - 1.5em}
+    \splitslide{0.7}{.7em}{
         \small
 
         Offline graphics are used when the medium is non-interactive (movies,
@@ -101,19 +104,16 @@
         calculations. However, this comes at a cost. Individual frames may
         take days to render.
 
-    \end{minipage}%
-    \hspace{1.5em}%
-    \begin{minipage}{.3\textwidth}
+    }{
         \includegraphics[width=\textwidth]{graphics/tarkin_combo} \\
         \includegraphics[width=\textwidth]{graphics/green_mars}
-    \end{minipage}
+    }
 \end{frame}
 
 \section{History}
 
 \begin{frame}{1950s \& 1960s}
-    \noindent
-    \begin{minipage}{.65\textwidth - 2em}
+    \splitslide{0.65}{.7em}{
         \small
         \begin{itemize}
             \item Military used computer controlled oscilloscopes to display strategic information
@@ -122,17 +122,14 @@
             \item Research into elementary 3D wireframe graphics
             \item Very early raster displays
         \end{itemize}
-    \end{minipage}%
-    \hspace{1.5em}%
-    \begin{minipage}{.35\textwidth}
+    }{
         \includegraphics[width=\textwidth]{graphics/sage_control} \\
         \includegraphics[width=\textwidth]{graphics/spacewar}
-    \end{minipage}
+    }
 \end{frame}
 
 \begin{frame}{1970s \& 1980s}
-    \noindent
-    \begin{minipage}{.65\textwidth - 2em}
+    \splitslide{0.65}{.7em}{
         \small
         \begin{itemize}
             \item Basic lighting models such as Phong developed
@@ -141,18 +138,15 @@
             \item Modern GUIs are developed
             \item High-quality digital typesetting becomes commonplace
         \end{itemize}
-    \end{minipage}%
-    \hspace{1.5em}%
-    \begin{minipage}{.35\textwidth}
+    }{
         \includegraphics[width=\textwidth]{graphics/teapot_70s} \\
         \includegraphics[width=\textwidth]{graphics/ysh_knight} \\
         \includegraphics[width=\textwidth]{graphics/postscript_text}
-    \end{minipage}
+    }
 \end{frame}
 
 \begin{frame}{1990s \& 2000s}
-    \noindent
-    \begin{minipage}{.65\textwidth - 2em}
+    \splitslide{0.65}{.7em}{
         \small
         \begin{itemize}
             \item Fidelity and performance are immensely increased
@@ -161,18 +155,15 @@
             \item CGI becomes commonplace in Movies, advertisements, and TV 
             \item Global illumination and physically based rendering (PBR) techniques developed
         \end{itemize}
-    \end{minipage}%
-    \hspace{1.5em}%
-    \begin{minipage}{.35\textwidth}
+    }{
         \includegraphics[width=\textwidth]{graphics/supermario64} \\
         \includegraphics[width=\textwidth]{graphics/toy_story} \\
         \includegraphics[width=\textwidth]{graphics/iron_man_2008}
-    \end{minipage}
+    }
 \end{frame}
 
 \begin{frame}{Today}
-    \noindent
-    \begin{minipage}{.65\textwidth - 2em}
+    \splitslide{0.65}{.7em}{
         \small
         \begin{itemize}
             \item Given enough time, budget and expertise, offline graphics are photorealistic
@@ -181,42 +172,167 @@
             \item UIs and offline graphics are increasingly GPU accelerated
             \item Linux and Mac have improved support for games and graphical software
         \end{itemize}
-    \end{minipage}%
-    \hspace{1.5em}%
-    \begin{minipage}{.35\textwidth}
-        \includegraphics[width=\textwidth]{graphics/unreal4_damn} \\
+    }{
+        \includegraphics[width=\textwidth]{graphics/unreal4_damn.jpg} \\
         \includegraphics[width=\textwidth]{graphics/star_citizen_pbr} \\
         \includegraphics[width=\textwidth]{graphics/dr_strange} \\
         \includegraphics[width=\textwidth]{graphics/rogue_one_boom}
-    \end{minipage}
+    }
 \end{frame}
 
 \section{Fancy-pants-ery}
 
-\begin{frame}{Text}
-    \noindent
-    \begin{minipage}{.75\textwidth - 2em}
+\begin{frame}{Triangles}
+    \splitslide{0.65}{.7em}{
+        \small
+
+        For the most part, modern computer graphics deal in triangles. This is
+        because triangles have some nice geometric properties that other shapes
+        don't:
+
+        \begin{itemize}
+            \item It is very easy to test if a point is within a triangle (barycentric coordinates!)
+            \item A \underline{flat} 3D plane can be drawn through any 3 points (a triangle)
+            \item It is easy to calculate the direction a triangle is facing
+        \end{itemize}
+    }{
+        \includegraphics[width=\textwidth]{graphics/triangle}
+    }
+\end{frame}
+
+\begin{frame}{Textures}
+    \splitslide{0.65}{.7em}{
+        \small
+        \begin{itemize}
+            \item Textures allow for item
+        \end{itemize}
+    }{
+        \includegraphics[width=\textwidth]{graphics/teapot_brick}
+    }
+\end{frame}
+
+\begin{frame}{Mapping}
+    \splitslide{0.65}{.7em}{
         \small
         \begin{itemize}
             \item ...
         \end{itemize}
-    \end{minipage}%
-    \hspace{1.5em}%
-    \begin{minipage}{.25\textwidth}
+    }{
+        \includegraphics[width=\textwidth]{graphics/normal_map}
+    }
+\end{frame}
+
+\begin{frame}{Phong}
+    \splitslide{0.65}{.7em}{
+        \small
+        \begin{itemize}
+            \item ...
+        \end{itemize}
+    }{
+        \includegraphics[width=\textwidth]{graphics/subpixel_e}
+    }
+\end{frame}
+
+\begin{frame}{Painter's Algorithm}
+    \splitslide{0.65}{.7em}{
+        \small
+        \begin{itemize}
+            \item ...
+        \end{itemize}
+    }{
+        \includegraphics[width=\textwidth]{graphics/subpixel_e}
+    }
+\end{frame}
+
+\begin{frame}{Depth}
+    \splitslide{0.65}{.7em}{
+        \small
+        \begin{itemize}
+            \item ...
+        \end{itemize}
+    }{
+        \includegraphics[width=\textwidth]{graphics/subpixel_e}
+    }
+\end{frame}
+
+\begin{frame}{3D Modeling}
+    \splitslide{0.65}{.7em}{
+        \small
+        \begin{itemize}
+            \item ...
+        \end{itemize}
+    }{
+        \includegraphics[width=\textwidth]{graphics/subpixel_e}
+    }
+\end{frame}
+
+\begin{frame}{Text}
+    \splitslide{0.65}{.7em}{
+        \small
+        \begin{itemize}
+            \item ...
+        \end{itemize}
+    }{
         \includegraphics[width=\textwidth]{graphics/freetype_atlas}
-    \end{minipage}
+    }
 \end{frame}
 
 \begin{frame}{Sub-pixels}
-    \noindent
-    \begin{minipage}{.75\textwidth - 2em}
+    \splitslide{0.65}{.7em}{
         \small
         \begin{itemize}
             \item ...
         \end{itemize}
-    \end{minipage}%
-    \hspace{1.5em}%
-    \begin{minipage}{.25\textwidth}
+    }{
         \includegraphics[width=\textwidth]{graphics/subpixel_e}
-    \end{minipage}
+    }
 \end{frame}
+
+\begin{frame}{Multipass Rendering}
+    \splitslide{0.65}{.7em}{
+        \small
+        \begin{itemize}
+            \item ...
+        \end{itemize}
+    }{
+        \includegraphics[width=\textwidth]{graphics/subpixel_e}
+    }
+\end{frame}
+
+\begin{frame}{Raytracing}
+    \splitslide{0.65}{.7em}{
+        \small
+        \begin{itemize}
+            \item ...
+        \end{itemize}
+    }{
+        \includegraphics[width=\textwidth]{graphics/subpixel_e}
+    }
+\end{frame}
+
+\begin{frame}{Fresnel \& PBR}
+    \splitslide{0.65}{.7em}{
+        \small
+        \begin{itemize}
+            \item ...
+        \end{itemize}
+    }{
+        \includegraphics[width=\textwidth]{graphics/subpixel_e}
+    }
+\end{frame}
+
+\begin{frame}{Pathtracing}
+    \splitslide{0.65}{.7em}{
+        \small
+        \begin{itemize}
+            \item ...
+        \end{itemize}
+    }{
+        \includegraphics[width=\textwidth]{graphics/subpixel_e}
+    }
+    \noindent
+\end{frame}
+
+\section{Cool Stuff!}
+
+\end{document}
