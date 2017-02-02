@@ -182,17 +182,34 @@
 
 \section{Fancy-pants-ery}
 
+\begin{frame}{Meshes}
+    \splitslide{0.65}{.7em}{
+        \small
+
+        3D shapes are often stored as a jumble of points (called verticies),
+        scattered in space. These points are linked together into polygons,
+        which form the surface of the model. Other methods of storing 3D
+        shapes exist, such as the parametric forms used by Solid Works, but
+        "meshes" are by far the most common. In fact, even when a different
+        form is used, the model is almost always converted into a mesh for
+        rendering anyway.
+
+    }{
+        \includegraphics[width=\textwidth]{graphics/teapot_mesh}
+    }
+\end{frame}
+
 \begin{frame}{Triangles}
     \splitslide{0.65}{.7em}{
         \small
 
-        For the most part, modern computer graphics deal in triangles. This is
-        because triangles have some nice geometric properties that other shapes
-        don't:
+        While any polygon could be used in a mesh, modern computer graphics
+        deal almost exclusively in triangles. This is because triangles have
+        some nice geometric properties that other shapes don't:
 
         \begin{itemize}
             \item It is very easy to test if a point is within a triangle (barycentric coordinates!)
-            \item A \underline{flat} 3D plane can be drawn through any 3 points (a triangle)
+            \item Any 3 points can be haphazardly connected together and still form a \underline{flat} triangle
             \item It is easy to calculate the direction a triangle is facing
         \end{itemize}
     }{
@@ -203,20 +220,40 @@
 \begin{frame}{Textures}
     \splitslide{0.65}{.7em}{
         \small
-        \begin{itemize}
-            \item Textures allow for item
-        \end{itemize}
+
+         Textures are images (though they can contain more than colors) that
+         are wrapped around 3D models. The exact method for this varies, but
+         most of the time the wrapping is defined by a second set of
+         coordinates attached to each vertex/point. This specifies where on
+         the texture that point (and by extension, attached triangles) should
+         lie.
+
+         \vspace{1ex}
+
+         This second set of positions is called the "UV map".
+
     }{
-        \includegraphics[width=\textwidth]{graphics/teapot_brick}
+        \includegraphics[width=\textwidth]{graphics/teapot_brick} \\
+        \includegraphics[width=\textwidth]{graphics/uv_map}
     }
 \end{frame}
 
 \begin{frame}{Mapping}
     \splitslide{0.65}{.7em}{
         \small
-        \begin{itemize}
-            \item ...
-        \end{itemize}
+
+        Textures can be used to cover objects in all sorts of information. Not
+        just color, but also material properties such as shininess and even
+        precaculated lighting information.
+
+        \vspace{1ex}
+
+        More advanced techniques (such as bump, normal, and parallax mapping)
+        can be used to fake bumps and other minute, shaded details on
+        technically flat surfaces. Games use this extensively to make low-%
+        resolution objects appear highly detailed (think screws, buckles,
+        bricks, tree bark, ground texture, etc.)
+ 
     }{
         \includegraphics[width=\textwidth]{graphics/normal_map}
     }
@@ -225,11 +262,20 @@
 \begin{frame}{Phong}
     \splitslide{0.65}{.7em}{
         \small
-        \begin{itemize}
-            \item ...
-        \end{itemize}
+
+        Phong is the simplest common shading model. It mixes diffuse shading
+        (areas facing a light are brighter) and specular shading (areas that
+        reflect light towards the camera are brighter) together. Think of how
+        you would shade something with a pencil.
+
+        \vspace{1ex}
+
+        While this kind of works, it massively simplifies how real-world
+        materials and lights interact. As a result, it looks downright fake.
+
     }{
-        \includegraphics[width=\textwidth]{graphics/subpixel_e}
+        \includegraphics[width=\textwidth]{graphics/pencil_phong} \\
+        \includegraphics[width=\textwidth]{graphics/phong}
     }
 \end{frame}
 
