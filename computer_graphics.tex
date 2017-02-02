@@ -180,7 +180,64 @@
     }
 \end{frame}
 
-\section{Fancy-pants-ery}
+\section{Easy on the Eyes}
+
+\begin{frame}{Text}
+    \splitslide{0.65}{.7em}{
+        \small
+
+        The most common thing shown on screens is probably text. It is no
+        wonder then that displaying text is one of the most sphisticated areas
+        of computer graphics.
+
+    }{
+        \includegraphics[width=\textwidth]{graphics/freetype_atlas} \\
+        \includegraphics[width=\textwidth]{graphics/subpixel_e}
+    }
+\end{frame}
+
+\begin{frame}{Which is better?}
+    \includegraphics[width=\textwidth]{graphics/subpixel_side_by_side}
+\end{frame}
+
+\begin{frame}{Anti-aliasing}
+    \splitslide{0.65}{.7em}{
+        \small
+
+        When small shapes (such as letters) are rasterized, details can find
+        themselves squished into single pixels. In these cases, the color of
+        the pixel is chosen arbitrarily depending on how the rasterization is
+        performed. This creates all sorts of strange effects and hard edges,
+        called "aliases".
+
+        \vspace{1ex}
+
+        The quality of the image can be greatly improved in some cases by
+        using "anti-aliasing" algorithms and techniques.
+
+    }{
+        \includegraphics[width=\textwidth]{graphics/aliased} \\
+        \includegraphics[width=\textwidth]{graphics/antialias_line}
+    }
+\end{frame}
+
+\begin{frame}{Sub-pixels}
+    \splitslide{0.65}{.7em}{
+        \small
+
+        Anti-aliasing can be taken further. After all, each pixel is really 3
+        small red, green, and blue rectangles joined together. Clever people
+        have figured out how to use these extra rectangles to further smooth
+        the edges of letters and lines. This is why blown-up text (in an image
+        editor) ends up being slightly colored on the edges.
+
+    }{
+        \includegraphics[width=\textwidth]{graphics/pixel_circle} \\
+        \includegraphics[width=\textwidth]{graphics/subpixel_circle}
+    }
+\end{frame}
+
+\section{3D Shapes \& Geometry}
 
 \begin{frame}{Meshes}
     \splitslide{0.65}{.7em}{
@@ -216,6 +273,16 @@
         \includegraphics[width=\textwidth]{graphics/triangle}
     }
 \end{frame}
+
+\begin{frame}{3D Modeling}
+    \splitslide{0.5}{.2em}{
+        \includegraphics[width=\textwidth]{graphics/subpixel_e}
+    }{
+        \includegraphics[width=\textwidth]{graphics/subpixel_e}
+    }
+\end{frame}
+
+\section{Making it Pretty}
 
 \begin{frame}{Textures}
     \splitslide{0.65}{.7em}{
@@ -282,59 +349,131 @@
 \begin{frame}{Painter's Algorithm}
     \splitslide{0.65}{.7em}{
         \small
-        \begin{itemize}
-            \item ...
-        \end{itemize}
+
+        It goes without saying that things that are farther away should be
+        hidden by things that are closer. The simplest way to do this in a
+        computer is to draw the farther stuff first, so that when nearer stuff
+        is drawn, it covers the previous stuff up.
+
+        \vspace{1ex}
+
+        However, this requires all the objects in the scene to be constantly
+        resorted. It also can't deal with objects that mutually cover each
+        other (like the Olympic rings).
+
+        \vspace{1ex}
+
+        That being said, there are still cases where the Painter's Algorithm
+        is the only viable method.
+
     }{
-        \includegraphics[width=\textwidth]{graphics/subpixel_e}
+        \includegraphics[width=\textwidth]{graphics/painters_alg}
     }
 \end{frame}
 
 \begin{frame}{Depth}
     \splitslide{0.65}{.7em}{
         \small
-        \begin{itemize}
-            \item ...
-        \end{itemize}
+
+        A more common way to hide objects behind each other is to use a depth
+        buffer. A depth buffer is a sort of distance image. In addition to
+        keeping track of the color of each pixel, the distance from the camera
+        to that pixel is also tracked. Then, whenever a new pixel is
+        calculated, the computer checks whether is in front of or behind what
+        is already there.
+
     }{
-        \includegraphics[width=\textwidth]{graphics/subpixel_e}
+        \includegraphics[width=\textwidth]{graphics/zbuffer2} \\
+        \includegraphics[width=\textwidth]{graphics/zbuffer}
     }
 \end{frame}
 
-\begin{frame}{3D Modeling}
+\section{Effects}
+
+\begin{frame}{Transparency}
     \splitslide{0.65}{.7em}{
         \small
-        \begin{itemize}
-            \item ...
-        \end{itemize}
+
+        Transparency can put a wrench in things.
+
     }{
-        \includegraphics[width=\textwidth]{graphics/subpixel_e}
+        \includegraphics[width=\textwidth]{graphics/transparent}
     }
 \end{frame}
 
-\begin{frame}{Text}
+\begin{frame}{Post-Processing}
     \splitslide{0.65}{.7em}{
         \small
-        \begin{itemize}
-            \item ...
-        \end{itemize}
-    }{
-        \includegraphics[width=\textwidth]{graphics/freetype_atlas}
-    }
-\end{frame}
 
-\begin{frame}{Sub-pixels}
-    \splitslide{0.65}{.7em}{
-        \small
-        \begin{itemize}
-            \item ...
-        \end{itemize}
+        Texturing and shading is not always enough to make an image look good.
+        Any photoshop guru can tell you how much a little tweaking can improve
+        things. These "post-processing effects" arn't just used to make
+        realtime graphics nicer, they are used to style-up photographs and
+        videos as well.
+
     }{
-        \includegraphics[width=\textwidth]{graphics/subpixel_e}
+        \includegraphics[width=\textwidth]{graphics/color_grading.jpeg}
     }
 \end{frame}
 
 \begin{frame}{Multipass Rendering}
+    \splitslide{0.65}{.7em}{
+        \small
+
+        Post-processing can be taken even further. Instead of lighting and
+        textured being performed as the shapes are rasterized, data from along
+        the way can be saved in buffers and stapled together after the fact.
+
+        \vspace{1ex}
+
+        This has numerous benefits depending on how it is used. It is useful
+        in realtime graphics because data from a single pass can be recycled
+        to create multiple effects. Artists working on offline graphics like
+        it because it lets them tweak shading and lighting without re-%
+        rendering the whole scene.
+
+    }{
+        \includegraphics[width=\textwidth]{graphics/multipass}
+    }
+\end{frame}
+
+\begin{frame}{Bluring}
+    \splitslide{0.65}{.7em}{
+        \small
+
+        Transparency can put a wrench in things.
+
+    }{
+        \includegraphics[width=\textwidth]{graphics/transparent}
+    }
+\end{frame}
+
+\begin{frame}{Compositing}
+    \splitslide{0.65}{.7em}{
+        \small
+        \begin{itemize}
+            \item ...
+        \end{itemize}
+    }{
+        \includegraphics[width=\textwidth]{graphics/subpixel_e}
+    }
+    \noindent
+\end{frame}
+
+\section{Realism}
+
+\begin{frame}{Reflection}
+    \splitslide{0.65}{.7em}{
+        \small
+        \begin{itemize}
+            \item ...
+        \end{itemize}
+    }{
+        \includegraphics[width=\textwidth]{graphics/subpixel_e}
+    }
+\end{frame}
+
+\begin{frame}{Refraction}
     \splitslide{0.65}{.7em}{
         \small
         \begin{itemize}
@@ -367,6 +506,28 @@
     }
 \end{frame}
 
+\begin{frame}{Local Illumination}
+    \splitslide{0.65}{.7em}{
+        \small
+        \begin{itemize}
+            \item ...
+        \end{itemize}
+    }{
+        \includegraphics[width=\textwidth]{graphics/subpixel_e}
+    }
+\end{frame}
+
+\begin{frame}{Global Illumination}
+    \splitslide{0.65}{.7em}{
+        \small
+        \begin{itemize}
+            \item ...
+        \end{itemize}
+    }{
+        \includegraphics[width=\textwidth]{graphics/subpixel_e}
+    }
+\end{frame}
+
 \begin{frame}{Pathtracing}
     \splitslide{0.65}{.7em}{
         \small
@@ -379,6 +540,6 @@
     \noindent
 \end{frame}
 
-\section{Cool Stuff!}
+\section{Wrapping it Up}
 
 \end{document}
