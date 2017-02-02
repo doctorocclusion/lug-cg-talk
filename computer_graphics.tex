@@ -1,6 +1,6 @@
 \documentclass{lug}
 
-\title{Computer Graphics \& OpenGL}
+\title{Computer Graphics}
 \author{Sam Sartor}
 \institute{Mines Linux Users Group}
 
@@ -274,12 +274,34 @@
     }
 \end{frame}
 
+\begin{frame}{Projection \& Rasterization}
+    \splitslide{0.65}{.7em}{
+        \small
+
+        Meshes are 3D geometry. Screens are 2D pixels. Of the ways to convert
+        between them, projection and rasterization is by far the simplest and
+        most common. It works like so:
+
+        \begin{enumerate}
+            \item Rotate the scene such that $x$ is horizontal, $y$ is vertical, and $z$ is into the screen
+            \item Do math for perspective
+            \item Remove the $z$ value to "project" everything onto the $xy$ plane
+            \item Iterate over the pixels the triangle covers
+        \end{enumerate}
+    }{
+        \includegraphics[width=\textwidth]{graphics/rasterization} \\
+        \includegraphics[width=\textwidth]{graphics/projection}
+    }
+\end{frame}
+
 \begin{frame}{3D Modeling}
     \splitslide{0.5}{.2em}{
-        \includegraphics[width=\textwidth]{graphics/subpixel_e}
+        \includegraphics[width=\textwidth]{graphics/blender_eyes} \\
+        \includegraphics[width=\textwidth]{graphics/zbrush_squid}
     }{
-        \includegraphics[width=\textwidth]{graphics/subpixel_e}
+        \includegraphics[width=\textwidth]{graphics/strip_head}
     }
+        
 \end{frame}
 
 \section{Making it Pretty}
@@ -394,7 +416,17 @@
     \splitslide{0.65}{.7em}{
         \small
 
-        Transparency can put a wrench in things.
+        Simplicity, fidelity, speed. Pick one. Once transparency gets
+        involved, the color of a given pixel is suddenly determined by more
+        than one surface. This problem of mixing colors is common to pretty
+        much all difficult-to-do things in computer graphics.
+
+        \vspace{1ex}
+
+        Most of the time transparency is handled by resorting back to the
+        Painter's Algorithm. The rest of the scene can still use depth-%
+        buffers, but it no longer makes sense to assign a single depth to
+        those particular pixels.
 
     }{
         \includegraphics[width=\textwidth]{graphics/transparent}
@@ -441,21 +473,37 @@
     \splitslide{0.65}{.7em}{
         \small
 
-        Transparency can put a wrench in things.
+        There are all sorts of algorithms to blur things, but the general case
+        is pretty simple. The pixels around a point are weighted and averaged
+        together.
+
+        \vspace{1ex}
+
+        Blurring is generally a post processing effect, but it can get more
+        complicated when involving out-of-focus (field of view) effects.
 
     }{
-        \includegraphics[width=\textwidth]{graphics/transparent}
+        \includegraphics[width=\textwidth]{graphics/gaussian_blur}
     }
 \end{frame}
 
 \begin{frame}{Compositing}
     \splitslide{0.65}{.7em}{
         \small
-        \begin{itemize}
-            \item ...
-        \end{itemize}
+
+        Compositing is mostly associated with movies and TV but it can apply
+        to realtime visualizations and user interfaces as well. It is the
+        process of combining graphics from multiple sources into a single
+        image.
+
+        \vspace{1ex}
+
+        Green screening, color grading, atmospheric effects, etc. often fall
+        under the umbrella of compositing.
+
     }{
-        \includegraphics[width=\textwidth]{graphics/subpixel_e}
+        \includegraphics[width=\textwidth]{graphics/compositing_matte} \\
+        \includegraphics[width=\textwidth]{graphics/compositing}
     }
     \noindent
 \end{frame}
@@ -465,77 +513,118 @@
 \begin{frame}{Reflection}
     \splitslide{0.65}{.7em}{
         \small
-        \begin{itemize}
-            \item ...
-        \end{itemize}
+
+        We have all seen images reflected in water, mirrors, shiny things,
+        clean tables, computer screens, the list goes on. Achieving it in a
+        computer is actually quite difficult. Often (especially for realtime
+        applications) reflections are just cleverly distorted panoramas
+        slapped onto the object of question. This breaks down on any
+        complicated surface or scene however.
+
+        \vspace{1ex}
+
+        There is a REAL way of doing it, we will get to that in a few slides.
+
     }{
-        \includegraphics[width=\textwidth]{graphics/subpixel_e}
+        \includegraphics[width=\textwidth]{graphics/puddle-reflection}
     }
 \end{frame}
 
 \begin{frame}{Refraction}
     \splitslide{0.65}{.7em}{
         \small
-        \begin{itemize}
-            \item ...
-        \end{itemize}
+
+        Refraction is even freakier and fakeir. You can \textit{kindof} do it
+        in real time with fancy panoramas as well, but you don't want to know
+        how. Just trust me.
+
     }{
-        \includegraphics[width=\textwidth]{graphics/subpixel_e}
+        \includegraphics[width=\textwidth]{graphics/refraction}
     }
 \end{frame}
 
 \begin{frame}{Raytracing}
     \splitslide{0.65}{.7em}{
         \small
-        \begin{itemize}
-            \item ...
-        \end{itemize}
+
+        So far we have been (mosty) talking about rasterization, just
+        iterating through pixels. That is the only way to do things realtime,
+        but if you remember physics 101 (or have even played with a flash
+        light), you know that light doesn't work that way. It travels around
+        in beams (or rays).
+
+        \vspace{1ex}
+
+        Raytracing is a technique where "rays" of light are followed backward,
+        out of the camera and into the scene. They bounce off mirrors, refract
+        through glass, and pick up color along the way.
+
     }{
-        \includegraphics[width=\textwidth]{graphics/subpixel_e}
+        \includegraphics[width=\textwidth]{graphics/raytracing}
     }
 \end{frame}
 
 \begin{frame}{Fresnel \& PBR}
     \splitslide{0.65}{.7em}{
         \small
-        \begin{itemize}
-            \item ...
-        \end{itemize}
-    }{
-        \includegraphics[width=\textwidth]{graphics/subpixel_e}
-    }
-\end{frame}
 
-\begin{frame}{Local Illumination}
-    \splitslide{0.65}{.7em}{
-        \small
-        \begin{itemize}
-            \item ...
-        \end{itemize}
+        Our Phong shading model is also hopelessly unrealistic. For a start,
+        the reflectivity of an object actually changes depending on the angle
+        you look at it from (a property called "fresnel"). How materials
+        scatter light is really quite complicated in general. Taking that
+        complexity into account is called Physically Based Rendering or PBR.
+
+        \vspace{1ex}
+
+        It is hot stuff these days.
+
     }{
-        \includegraphics[width=\textwidth]{graphics/subpixel_e}
+        \includegraphics[width=\textwidth]{graphics/fresnel_spheres}
     }
 \end{frame}
 
 \begin{frame}{Global Illumination}
     \splitslide{0.65}{.7em}{
         \small
-        \begin{itemize}
-            \item ...
-        \end{itemize}
+
+        We have also been assuming that the photons emitted from lights are
+        somehow magical. Really everything is a light. A brightly illuminated
+        red wall will reflect red light onto the rest of the scene. A corner
+        is darker than the rest of the room because it is more shielded from
+        rouge light bouncing around. A mirror isn't perfectly reflective, but
+        actually blurs and scatters the image slightly. Shadows aren't on-or-%
+        off, they blur towards the edges.
+
+        \vspace{1ex}
+
+        All of this is collectively called "global illumination" because light
+        is a global property, it bounces and is emitted from everything, not
+        just a few key sources.
+
     }{
-        \includegraphics[width=\textwidth]{graphics/subpixel_e}
+        \includegraphics[width=\textwidth]{graphics/cornell_box}
     }
 \end{frame}
 
 \begin{frame}{Pathtracing}
     \splitslide{0.65}{.7em}{
         \small
-        \begin{itemize}
-            \item ...
-        \end{itemize}
+
+        Which brings us to pathtracing. Pathtracing is the penultimate
+        technique. Faster and more advanced methods exist in dissertations and
+        prototypes, but pathtracing is the only thing in this presentation
+        that can pass as photorealistic. It is more or less the method used
+        today for CGI in movies, TV, advertisements, and art.
+
+        \vspace{1ex}
+
+        It is similar to raytracing, but instead of light bouncing directly,
+        billions of theoretical and random paths are launched through the
+        scene. Probibilities are calculated for each, and then after some some
+        fancy statistics is applied, you get Iron Man.
+
     }{
-        \includegraphics[width=\textwidth]{graphics/subpixel_e}
+        \includegraphics[width=\textwidth]{graphics/loungeroom}
     }
     \noindent
 \end{frame}
